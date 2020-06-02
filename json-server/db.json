@@ -1,0 +1,19 @@
+{
+    "example": [{
+            "text1": "fdas",
+            "text2": "text"
+        },
+        {
+            "text1": "qwerty",
+            "text2": "asdfg"
+        },
+        {
+            "text1": "zxcvb",
+            "text2": "poiuy"
+        },
+        {
+            "text1": "lkjhg",
+            "text2": "123456"
+        }
+    ]
+}
