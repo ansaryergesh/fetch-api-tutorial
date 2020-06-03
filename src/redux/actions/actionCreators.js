@@ -35,3 +35,41 @@ export const fetchWords = () => dispatch => {
       .then(words => dispatch(addWords(words)))
       .catch(error => dispatch(wordsFailed(error.message)));
 };
+
+
+export const postWords = (text1, text2) => (dispatch) => {
+    const newWords = {
+        text1: text1,
+        text2: text2
+    };
+
+    return fetch(`${url}/word`, {
+        method: 'POST',
+        body: JSON.stringify(newWords),
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        credentials: 'same-origin'
+    })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            } else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+
+                throw error;
+            }
+        },
+            error => {
+                var errorMessage = new Error(error.errorMessage);
+                throw errorMessage;
+            }
+        )
+        .then(response => response.json())
+        .then(response => dispatch(addWords(response)))
+        .catch(error => {
+            console.log('Post words: ' + error.message);
+            alert('Words could not be posted:\n' + error.message)
+        })
+};
